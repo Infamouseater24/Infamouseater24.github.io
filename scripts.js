@@ -44,3 +44,60 @@ buyButtons.forEach(button => {
         // Here, you could integrate further cart logic or backend interaction.
     });
 });
+// Shopping Cart Variables
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const cartCount = document.getElementById('cart-count');
+const cartModal = document.getElementById('cart-modal');
+const cartItemsContainer = document.getElementById('cart-items');
+const totalPriceElement = document.getElementById('total-price');
+
+// Function to update cart count
+function updateCartCount() {
+    cartCount.textContent = cart.length;
+}
+
+// Function to display cart items
+function displayCartItems() {
+    cartItemsContainer.innerHTML = '';
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const fruitDiv = document.createElement('div');
+        fruitDiv.innerHTML = `<strong>${item.name}</strong> (Grade: ${item.grade}) - ${item.price} NRs`;
+        cartItemsContainer.appendChild(fruitDiv);
+        totalPrice += item.price;
+    });
+
+    totalPriceElement.textContent = `Total Price: ${totalPrice} NRs`;
+}
+
+// Event listener for the cart button
+document.getElementById('cart-btn').addEventListener('click', function () {
+    cartModal.style.display = 'block';
+    displayCartItems();
+});
+
+// Event listener for closing the modal
+document.querySelector('.close').addEventListener('click', function () {
+    cartModal.style.display = 'none';
+});
+
+// Function to handle "Buy Now" button clicks
+const buyButtons = document.querySelectorAll('.fruit-item button');
+
+buyButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const fruitName = this.parentElement.querySelector('h3').textContent;
+        const selectedGrade = this.parentElement.querySelector('select').value;
+        const price = parseInt(this.parentElement.querySelector('.price').textContent);
+
+        // Add item to cart
+        cart.push({ name: fruitName, grade: selectedGrade, price: price });
+        localStorage.setItem('cart', JSON.stringify(cart)); // Store cart in local storage
+        updateCartCount(); // Update cart count
+        alert(`You have added ${fruitName} (Grade: ${selectedGrade}) to your cart.`);
+    });
+});
+
+// Initial call to set the cart count on page load
+updateCartCount();
