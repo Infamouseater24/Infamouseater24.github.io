@@ -195,3 +195,34 @@ footer p {
     text-decoration: none;
     cursor: pointer;
 }
+/* User Account Styles */
+#user-account {
+    margin: 20px;
+}
+
+#user-account form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#user-account label {
+    margin: 5px 0;
+}
+
+#user-account input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#user-account button {
+    padding: 10px;
+    background-color: maroon;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#user-account button:hover {
+    background-color: darkred;
+}
