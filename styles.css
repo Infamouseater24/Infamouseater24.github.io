@@ -6,7 +6,11 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.logo {
+        display: block;
+        margin: 0 auto;
+        padding-top: 20px; /* Adjust as needed */
+    }
 /* Header Styles */
 header {
     background-color: #7b3e3e; /* Dark maroon */
