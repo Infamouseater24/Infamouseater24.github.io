@@ -21,6 +21,21 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+<div id="cart">
+    <button id="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</button>
+</div>
+
+<!-- Cart Modal -->
+<div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Your Shopping Cart</h2>
+        <div id="cart-items"></div>
+        <div id="total-price"></div>
+        <button id="checkout-btn">Checkout</button>
+    </div>
+</div>
+
     </header>
     <section id="filter">
         <h2>Filter by Price</h2>
