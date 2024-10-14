@@ -101,3 +101,48 @@ buyButtons.forEach(button => {
 
 // Initial call to set the cart count on page load
 updateCartCount();
+// User Account Variables
+const registerForm = document.getElementById('register-form');
+const loginForm = document.getElementById('login-form');
+const registerMessage = document.getElementById('register-message');
+const loginMessage = document.getElementById('login-message');
+
+// Function to handle user registration
+registerForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const username = document.getElementById('register-username').value;
+    const password = document.getElementById('register-password').value;
+
+    // Check if user already exists
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const existingUser = users.find(user => user.username === username);
+
+    if (existingUser) {
+        registerMessage.textContent = "Username already exists.";
+    } else {
+        // Create new user and store in local storage
+        users.push({ username, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        registerMessage.textContent = "Registration successful! You can log in now.";
+        registerForm.reset();
+    }
+});
+
+// Function to handle user login
+loginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    // Check if user exists and password is correct
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(user => user.username === username && user.password === password);
+
+    if (user) {
+        loginMessage.textContent = "Login successful!";
+        // You can now redirect the user or set session data
+        sessionStorage.setItem('loggedInUser', username); // Store logged in user in session storage
+    } else {
+        loginMessage.textContent = "Invalid username or password.";
+    }
+});
